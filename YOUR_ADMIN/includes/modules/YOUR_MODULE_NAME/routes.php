@@ -6,9 +6,9 @@ if (!defined('IS_ADMIN_FLAG')) {
 /**
  * Routes are determined by $_GET['action']
  * Formats:
- * $_GET['action'] = controller/method
+ * $_GET['action'] = 'controller/method'
  * Or:
- * $_GET['action'] = controller // a simple file with no class definition
+ * $_GET['action'] = 'controller' // a simple file with no class definition
  */
 $routes = new SimpleRoute(MODULE_FOLDER_YOUR_MODULE_NAME);
 

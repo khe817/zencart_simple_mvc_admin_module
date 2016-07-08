@@ -23,16 +23,16 @@ class SimpleController {
 	*       Loads a view from within the /plugin/templates folder. Keep in mind
 	*       that any data you need should be passed through the $this->data array.
 	*       A few examples:
-	*						$var_array = array();
-	*						$var_array['color'] = $input_color;
-	*						$var_array['shape'] = $input_shape;			
+	*           $var_array = array();
+	*           $var_array['color'] = $input_color;
+	*           $var_array['shape'] = $input_shape;
 	*           //Load /Plugin/templates/example.php
 	*           $this->render_view('example', $var_array);
 	*
 	*           //Load /Plugin/templates/subfolder/example.php
 	*           $this->render_view('subfolder/example', $var_array);
 	*
-	*				Within the view, use $color and $shape 
+	*       Within the view, use $color and $shape
 	*/
 	public function render ( $view, $var_array = array() ) {
 
