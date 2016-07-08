@@ -26,8 +26,13 @@ Add routes for controllers in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php (in
 
 Default controller is index, set in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php
 
-Controllers could be simple php files or classes.
-If controllers are classes, it must extends SimpleController class, and class name must be the same as file name.
+Controllers can be simple php files or classes.
+
+If controllers are classes:
+- It must extends SimpleController class.
+- Class name must be the same as file name.
+
+Controllers can be nested in sub folders within controllers/ folder.
 
 Model files must have the same names as controller files. Read index.html in YOUR_ADMIN/modules/YOUR_MODULE_NAME/models/
 

@@ -16,19 +16,26 @@ class SimpleRoute {
 	 * @return void
 	 */
 	public function call_to_controller ( $controller, $action = null ) {
-		if ( file_exists($this->module_dir . 'controllers/' . $controller . '.php') ) {
-			require_once($this->module_dir . 'controllers/' . $controller . '.php');
-		} else {
-			trigger_error("Controller $controller does not exist.", E_USER_ERROR);
-		}
+		// remove '/' before and after
+		$regex = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+		$controller = trim($controller, $regex);
 
+		// call to model for controller
 		if ( file_exists($this->module_dir . 'models/' . $controller . '.php') ) {
 			require_once($this->module_dir . 'models/' . $controller . '.php');
 		}
 
-		if ( isset($action) ) {
-			$controller = new $controller($this->module_dir);
-			$controller->{ $action }();
+		// call to controller
+		if ( file_exists($this->module_dir . 'controllers/' . $controller . '.php') ) {
+			require_once($this->module_dir . 'controllers/' . $controller . '.php');
+
+			if ( isset($action) ) {
+				$controller_class_name = basename($controller, '.php');
+				$controller = new $controller_class_name($this->module_dir);
+				$controller->{ $action }();
+			}
+		} else {
+			trigger_error("Controller $controller does not exist.", E_USER_ERROR);
 		}
 	}
 
