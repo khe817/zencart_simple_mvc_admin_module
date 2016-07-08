@@ -22,9 +22,14 @@ Main layout is in YOUR_ADMIN/modules/YOUR_MODULE_NAME/templates/main_layout.php
 
 Add common settings for the module in YOUR_MODULE_NAME.php
 
-Add routes for controllers in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php
+Add routes for controllers in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php (instructions is in the file)
 
-Default controller is index in YOUR_ADMIN/modules/YOUR_MODULE_NAME/controllers/index.php
+Default controller is index, set in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php
+
+Controllers could be simple php files or classes.
+If controllers are classes, it must extends SimpleController class, and class name must be the same as file name.
+
+Model files must have the same names as controller files. Read index.html in YOUR_ADMIN/modules/YOUR_MODULE_NAME/models/
 
 Main scripts are always included (main.js, main_config.js, main.css).
 
@@ -32,3 +37,6 @@ Add controller related scripts in YOUR_ADMIN/modules/YOUR_MODULE_NAME/js/ ,
 under the same names as controllers.
 
 Example for ajax actions is in YOUR_ADMIN/modules/YOUR_MODULE_NAME/js/main.js
+
+Example module using this framework:
+https://bitbucket.org/numinix/authorizenet_virtual_terminal

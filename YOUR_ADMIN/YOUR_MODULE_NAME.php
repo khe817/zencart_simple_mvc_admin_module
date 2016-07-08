@@ -1,14 +1,19 @@
 <?php
 require('includes/application_top.php');
 
-// --- Common settings
-if (!zen_not_null($_GET['action'])) {
-	$_GET['action'] = 'index';
+// TODO: your custom settings
+//
+//
+
+// --- include simple MVC framework
+$simple_mvc_dir = MODULE_FOLDER_YOUR_MODULE_NAME . 'simple_mvc/';
+$simple_mvc_files = glob($simple_mvc_dir . "/*.php");
+
+if ( !empty($simple_mvc_files) ) {
+	foreach ( $simple_mvc_files as $simple_mvc_file ) {
+		require $simple_mvc_file;
+	}
 }
-
-// TODOD: your settings
-
-// --- eof Common settings
 
 // --- Routing
 require(MODULE_FOLDER_YOUR_MODULE_NAME . 'routes.php');
