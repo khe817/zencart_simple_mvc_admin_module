@@ -14,16 +14,16 @@ $routes = new SimpleRoute(MODULE_FOLDER_YOUR_MODULE_NAME);
 
 // --- register routes to controller-method here
 
-// this makes the framework call to method index in class ExampleController
-// in YOUR_ADMIN/includes/modules/YOUR_MODULE_NAME/controllers/ExampleController.php
+// this makes the framework call to method index in class Example
+// in YOUR_ADMIN/includes/modules/YOUR_MODULE_NAME/controllers/Example.php
 $routes->register('example/index', // route
-	'ExampleController', // controller
+	'Example', // controller that is a class
 	'index' // method
 	);
 
-// this makes the framework call to YOUR_ADMIN/includes/modules/YOUR_MODULE_NAME/controllers/index.php file
+// this makes the framework call to YOUR_ADMIN/includes/modules/YOUR_MODULE_NAME/controllers/example.php file
 $routes->register('index', // route
-	'index' // controller
+	'example' // controller that is a simple file
 	);
 
 // ajax action as a controller
@@ -34,7 +34,7 @@ $routes->register('ajax_action_example', // route
 // controllers can be nested in sub folders within controllers/ folder
 /* example:
 $routes->register('example/index', // route
-	'sub_folder/ExampleController', // controller
+	'sub_folder/Example', // controller
 	'index' // method
 	);
 */
