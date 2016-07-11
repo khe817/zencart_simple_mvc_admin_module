@@ -85,6 +85,9 @@ class SimpleRoute {
 			$controller = $this->routes[$route];
 		}
 		if ( array_key_exists($controller, $this->controllers) ) {
+			// remove '/' before and after
+			$regex = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+			$route = trim($route, $regex);
 			$routes_parts = explode('/', $route);
 			switch ( count($routes_parts) ) {
 				case 1: // controller is just a file
