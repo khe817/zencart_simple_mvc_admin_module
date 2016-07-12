@@ -89,13 +89,14 @@ class SimpleRoute {
 			$regex = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
 			$route = trim($route, $regex);
 			$routes_parts = explode('/', $route);
-			switch ( count($routes_parts) ) {
-				case 1: // controller is just a file
+			$routes_parts_count = count($routes_parts);
+			switch ( true ) {
+				case $routes_parts_count == 1: // controller is just a file
 					$this->call_to_controller($controller);
 					break;
 
-				case 2: // controller is a class
-					$action = $routes_parts[1];
+				case $routes_parts_count > 1: // controller is a class
+					$action = $routes_parts[$routes_parts_count - 1];
 					if ( in_array($action, $this->controllers[$controller]) ) {
 						$this->call_to_controller($controller, $action);
 					} else {

@@ -32,12 +32,14 @@ $routes->register('ajax_action_example', // route
 	);
 
 // Tips: controllers can be nested in sub folders within controllers/ folder
-/* example:
+// example:
+/*
 $routes->register('example/index', // route
 	'sub_folder/Example', // controller
 	'index' // method
 	);
 */
+
 // --- eof register routes to controller-method
 
 if ( isset($_GET['action']) && $_GET['action'] != '' ) {
