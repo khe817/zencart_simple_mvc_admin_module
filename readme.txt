@@ -20,7 +20,7 @@ USAGE
 ===================
 Main layout is in YOUR_ADMIN/modules/YOUR_MODULE_NAME/templates/main_layout.php
 
-Add common settings for the module in YOUR_MODULE_NAME.php
+Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 Add routes for controllers in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php (instructions is in the file)
 
@@ -32,7 +32,7 @@ If controllers are classes:
 - It must extends SimpleController class.
 - Class name must be the same as file name.
 
-Controllers can be nested in sub folders within controllers/ folder.
+Controllers can be nested in sub folders within YOUR_ADMIN/modules/YOUR_MODULE_NAME/controllers/ folder.
 
 Model files must have the same names as controller files. Read index.html in YOUR_ADMIN/modules/YOUR_MODULE_NAME/models/
 
