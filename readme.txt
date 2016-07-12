@@ -1,7 +1,7 @@
 ===================
 DESCRIPTION
 ===================
-Simple View-Controller admin module framework with routers, controllers, and views
+Simple Model-View-Controller admin module framework with routers, models, controllers, and views
 packaged in one folder for clean & quick development.
 
 
