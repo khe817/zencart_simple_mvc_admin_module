@@ -35,6 +35,7 @@ class SimpleController {
 	*       Within the view, use $color and $shape
 	*/
 	public function render ( $view, $var_array = array() ) {
+		global $db, $PHP_SELF;
 
 		if ( count($var_array > 0) ) {
 			extract($var_array, EXTR_OVERWRITE);

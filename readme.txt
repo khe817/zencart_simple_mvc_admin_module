@@ -45,3 +45,34 @@ Example for ajax actions is in YOUR_ADMIN/modules/YOUR_MODULE_NAME/js/main.js
 
 Example module using this framework:
 https://bitbucket.org/numinix/authorizenet_virtual_terminal
+
+
+===================
+TIPS
+===================
+ooo Redirect to another controller inside a controller:
+[code]
+	global $routes;
+	$routes->call_to_controller('controller', 'method');
+[code]
+
+ooo Two methods for calling a view in controller:
+# Method 1: call directly
+[code]
+	// --- template vars
+	$controller = $this->controller_name;
+	$main_template = 'index';
+	require($this->get_template_path('main_layout.php'));
+[code]
+
+# Method 2: render view with passing data
+[code]
+	$view_data = array(
+		'controller' => $controller,
+		'main_template' => $main_template,
+		'current_admin_name' => $current_admin_name,
+		);
+	$this->render('main_layout', $view_data);
+[code]
+
+This method requires putting <?php exit(); ?> after </html> close tag

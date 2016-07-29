@@ -4,6 +4,7 @@ class SimpleRoute {
 	public $module_dir;
 	public $controllers = array();
 	public $routes = array();
+	public $in_used_controllers = array();
 
 	function __construct ( $module_dir = __DIR__) {
 		$this->module_dir = $module_dir;
@@ -30,9 +31,15 @@ class SimpleRoute {
 			require_once($this->module_dir . 'controllers/' . $controller . '.php');
 
 			if ( isset($action) ) {
-				$controller_class_name = basename($controller, '.php');
-				$controller = new $controller_class_name($this->module_dir);
-				$controller->{ $action }();
+				if ( !array_key_exists($controller, $this->in_used_controllers) ) { // create new object if not eixsts
+					$controller_class_name = basename($controller, '.php');
+					$to_call_controller = new $controller_class_name($this->module_dir);
+					$this->in_used_controllers[$controller] = $to_call_controller;
+				} else { // re-use existing controller
+					$to_call_controller = $this->in_used_controllers[$controller];
+				}
+				$to_call_controller->{ $action }();
+				$to_call_controller = null;
 			}
 		} else {
 			trigger_error("Controller $controller does not exist.", E_USER_ERROR);

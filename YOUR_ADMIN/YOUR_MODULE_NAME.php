@@ -7,7 +7,7 @@ require('includes/application_top.php');
 
 // --- include simple MVC framework
 $simple_mvc_dir = MODULE_FOLDER_YOUR_MODULE_NAME . 'simple_mvc/';
-$simple_mvc_files = glob($simple_mvc_dir . "/*.php");
+$simple_mvc_files = glob($simple_mvc_dir . "*.php");
 
 if ( !empty($simple_mvc_files) ) {
 	foreach ( $simple_mvc_files as $simple_mvc_file ) {
