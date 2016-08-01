@@ -49,6 +49,7 @@ class SimpleController {
 		if ( file_exists($template_path) ) {
 			ob_start();
 			include($template_path);
+			exit(1);
 			$output = ob_get_contents();
 			ob_get_clean();
 			return $output;

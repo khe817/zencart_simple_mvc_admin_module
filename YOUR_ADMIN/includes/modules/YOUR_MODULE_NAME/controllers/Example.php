@@ -20,16 +20,16 @@ class Example extends SimpleController {
 		// --- template vars
 		$controller = $this->controller_name;
 		$main_template = 'index';
-		// --- render view
-		require($this->get_template_path('main_layout.php'));
 
-		// --- alternate view render, This method requires putting <?php exit(); after </html> close tag
-/*		$view_data = array(
+		// --- render view
+		$view_data = array(
 			'controller' => $controller,
 			'main_template' => $main_template,
 			'current_admin_name' => $current_admin_name,
 			);
 		$this->render('main_layout', $view_data);
-*/
+
+		// --- alternate view render
+		//require($this->get_template_path('main_layout.php'));
 	}
 }
