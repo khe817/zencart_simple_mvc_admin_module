@@ -51,11 +51,11 @@
 	<script src="<?php echo MODULE_FOLDER_YOUR_MODULE_NAME; ?>js/main.js"></script>
 
 	<?php // load controller's related scripts
-	if ( file_exists(DIR_WS_MODULES . MODULE_FOLDER_NUMINIX_EDIT_PRODUCT . 'js/' . $controller . '.php') ) {
-		require(DIR_WS_MODULES . MODULE_FOLDER_NUMINIX_EDIT_PRODUCT . 'js/' . $controller . '.php');
+	if ( file_exists(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.php') ) {
+		require(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.php');
 	}
-	if ( file_exists(DIR_WS_MODULES . MODULE_FOLDER_NUMINIX_EDIT_PRODUCT . 'js/' . $controller . '.js') ) { ?>
-		<script src="<?php echo DIR_WS_MODULES . MODULE_FOLDER_NUMINIX_EDIT_PRODUCT . 'js/' . $controller . '.js'; ?>"></script>
+	if ( file_exists(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.js') ) { ?>
+		<script src="<?php echo MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.js'; ?>"></script>
 	<?php } ?>
 	<!-- eof module js -->
 </body>

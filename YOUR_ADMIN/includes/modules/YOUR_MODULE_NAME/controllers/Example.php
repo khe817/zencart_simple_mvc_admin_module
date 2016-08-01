@@ -18,12 +18,10 @@ class Example extends SimpleController {
 		$current_admin_name = $exampleModel->get_current_admin_name();
 
 		// --- template vars
-		$controller = $this->controller_name;
 		$main_template = 'index';
 
 		// --- render view
 		$view_data = array(
-			'controller' => $controller,
 			'main_template' => $main_template,
 			'current_admin_name' => $current_admin_name,
 			);

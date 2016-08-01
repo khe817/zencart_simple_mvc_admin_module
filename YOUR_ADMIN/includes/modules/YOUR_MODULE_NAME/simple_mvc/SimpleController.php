@@ -12,9 +12,12 @@ class SimpleController {
 	public $image_dir;
 
 	function __construct ( $module_dir = __DIR__) {
-		$this->controller_name = basename(__FILE__, '.php');
+		$this->controller_name = get_class($this);
 		$this->module_dir = $module_dir;
 		$this->template_dir = $this->module_dir . 'templates'. DIRECTORY_SEPARATOR;
+		$this->js_dir = $this->module_dir . 'js' . DIRECTORY_SEPARATOR;
+		$this->css_dir = $this->module_dir . 'css' . DIRECTORY_SEPARATOR;
+		$this->image_dir = $this->module_dir . 'images' . DIRECTORY_SEPARATOR;
 	}
 
 	/*
