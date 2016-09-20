@@ -42,11 +42,14 @@ $routes->register('example/index', // route
 
 // --- eof register routes to controller-method
 
+// set default route
+$routes->set_default_route('index');
+//$routes->set_default_route('example/index'); // example default action
+
 if ( isset($_GET['action']) && $_GET['action'] != '' ) {
 	$action = $_GET['action'];
 } else { // the default route
-	$action = 'index';
-	// $action = 'example/index'; // example default action
+	$action = $routes->default_route;
 }
 
 // navigate to the corresponding controller-method

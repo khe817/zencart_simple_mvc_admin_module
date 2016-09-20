@@ -6,9 +6,26 @@ class SimpleRoute {
 	public $routes = array();
 	public $in_used_controllers = array();
 	public $controller_name;
+	public $default_route = '';
 
-	function __construct ( $module_dir = __DIR__) {
+	/**
+	 * contruct: set path to where the whole module locates
+	 * @param string $module_dir module's directory
+	 */
+	function __construct ( $module_dir = __DIR__ ) {
 		$this->module_dir = $module_dir;
+	}
+
+	/**
+	 * Set default route, to use when no route is set for navigation
+	 * @param string $route route to set
+	 */
+	public function set_default_route( $route = '' ) {
+		if ( is_string($route) && $route != '' ) {
+			$this->default_route = $route;
+		} else {
+			trigger_error("Invalid default route: $route.", E_USER_ERROR);
+		}
 	}
 
 	/**
@@ -86,10 +103,15 @@ class SimpleRoute {
 
 	/**
 	 * navigate route to a controller-method
-	 * @param  string $route route from $_GET['action'], format: 'controller_class_name/method_name' or 'controller_file_name'
+	 * @param  string  $route       route from $_GET['action'], format: 'controller_class_name/method_name' or 'controller_file_name'
+	 * @param  boolean $use_default navigate to default route if a route can not be found
 	 * @return void
 	 */
-	public function navigate ( $route ) {
+	public function navigate ( $route, $use_default = true ) {
+		if ( $route == '' && $use_default && $this->default_route != '' ) {
+			$this->navigate($this->default_route);
+		}
+
 		if ( array_key_exists($route, $this->routes) ) {
 			$controller = $this->routes[$route];
 		}
@@ -109,16 +131,19 @@ class SimpleRoute {
 					if ( in_array($action, $this->controllers[$controller]) ) {
 						$this->call_to_controller($controller, $action);
 					} else {
-						trigger_error("Method $action in controller $controller is not registered.", E_USER_ERROR);
+						trigger_error("Method $action in controller $controller is not registered.", E_USER_WARNING);
+						if ( $use_default && $this->default_route != '' ) $this->navigate($this->default_route);
 					}
 					break;
 
 				default:
-					trigger_error("Invalid route: $route", E_USER_ERROR);
+					trigger_error("Invalid route: $route", E_USER_WARNING);
+					if ( $use_default && $this->default_route != '' ) $this->navigate($this->default_route);
 					break;
 			}
 		} else {
-			trigger_error("Controller $controller is not registered.", E_USER_ERROR);
+			trigger_error("Controller $controller is not registered.", E_USER_WARNING);
+			if ( $use_default && $this->default_route != '' ) $this->navigate($this->default_route);
 		}
 	}
 }
