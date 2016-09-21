@@ -66,18 +66,32 @@ class SimpleRoute {
 	}
 
 	/**
-	 * register actions to controller
-	 * @param  string          $controller  controller file name (without .php)
-	 * @param  string or array $actions     controller class's method names
+	 * register action to controller
+	 * @param  string $controller controller file name (without .php)
+	 * @param  string $action     controller class's method name
 	 * @return void
 	 */
-	public function register_actions ( $controller, $actions ) {
-		if ( isset($actions) || !empty($actions) ) {
-			if ( is_string($actions) && $actions != '' ) {
-				$this->controllers[$controller][] = $actions;
-			} elseif ( is_array($actions) ) {
-				array_push($this->controllers[$controller], $actions);
-			}
+	public function register_action_to_controller ( $controller, $action ) {
+		if ( isset($action)	&& is_string($action) && $action != ''
+				&& isset($controller) && is_string($controller) && $controller != ''
+				&& (!array_key_exists($controller, $this->controllers) || !in_array($action, $this->controllers[$controller])) ) {
+			$this->controllers[$controller][] = $action;
+		}
+	}
+
+	/**
+	 * register action-controller pair to route if action exist
+	 * @param  string $route      route from $_GET['action'], format: 'controller_class_name/method_name' or 'controller_file_name'
+	 * @param  string $controller controller file name (without .php)
+	 * @param  string $action     controller class's method name
+	 * @return void
+	 */
+	public function register_action_to_route ( $route, $controller, $action ) {
+		if ( isset($action)	&& is_string($action) && $action != ''
+				&& in_array($controller, $this->routes) && in_array($action, $this->controllers[$controller]) ) {
+			$this->routes[$route] = array($controller => $action);
+		} else {
+			trigger_error("Route already exist: $route", E_USER_WARNING);
 		}
 	}
 
@@ -90,15 +104,18 @@ class SimpleRoute {
 	 */
 	public function register ( $route, $controller, $action = '' ) {
 		// register route
-		if ( !array_key_exists($controller, $this->routes) ) {
+		if ( !array_key_exists($route, $this->routes) ) {
 			$this->routes[$route] = $controller;
+		} else {
+			trigger_error("Route already exist: $route", E_USER_WARNING);
 		}
 		// register controller
 		if ( !array_key_exists($controller, $this->controllers) ) {
 			$this->controllers[$controller] = array();
 		}
 		// register action
-		$this->register_actions($controller, $action);
+		$this->register_action_to_controller($controller, $action);
+		$this->register_action_to_route($route, $controller, $action);
 	}
 
 	/**
@@ -112,26 +129,33 @@ class SimpleRoute {
 			$this->navigate($this->default_route);
 		}
 
+		// remove '/' before and after
+		$regex = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+		$route = trim($route, $regex);
+
 		if ( array_key_exists($route, $this->routes) ) {
 			$controller = $this->routes[$route];
-		}
-		if ( array_key_exists($controller, $this->controllers) ) {
-			// remove '/' before and after
-			$regex = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-			$route = trim($route, $regex);
-			$routes_parts = explode('/', $route);
-			$routes_parts_count = count($routes_parts);
 			switch ( true ) {
-				case $routes_parts_count == 1: // controller is just a file
-					$this->call_to_controller($controller);
-					break;
+				case is_array($controller) : // controller is a class
+					// get action and controller associate with the route
+					$controller_tmp = array_keys($controller);
+					$controller_tmp = $controller_tmp[0];
+					$action = $controller[$controller_tmp];
+					$controller = $controller_tmp;
 
-				case $routes_parts_count > 1: // controller is a class
-					$action = $routes_parts[$routes_parts_count - 1];
-					if ( in_array($action, $this->controllers[$controller]) ) {
+					if ( array_key_exists($controller, $this->controllers) && in_array($action, $this->controllers[$controller]) ) {
 						$this->call_to_controller($controller, $action);
 					} else {
 						trigger_error("Method $action in controller $controller is not registered.", E_USER_WARNING);
+						if ( $use_default && $this->default_route != '' ) $this->navigate($this->default_route);
+					}
+					break;
+
+				case is_string($controller) : // controller is just a file
+					if ( array_key_exists($controller, $this->controllers) ) {
+						$this->call_to_controller($controller);
+					} else {
+						trigger_error("Controller $controller is not registered.", E_USER_WARNING);
 						if ( $use_default && $this->default_route != '' ) $this->navigate($this->default_route);
 					}
 					break;
@@ -142,7 +166,7 @@ class SimpleRoute {
 					break;
 			}
 		} else {
-			trigger_error("Controller $controller is not registered.", E_USER_WARNING);
+			trigger_error("Route $route is not registered.", E_USER_WARNING);
 			if ( $use_default && $this->default_route != '' ) $this->navigate($this->default_route);
 		}
 	}

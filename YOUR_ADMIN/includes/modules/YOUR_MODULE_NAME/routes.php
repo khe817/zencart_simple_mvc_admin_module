@@ -16,9 +16,9 @@ $routes = new SimpleRoute(MODULE_FOLDER_YOUR_MODULE_NAME);
 
 // this makes the framework call to method index in class Example
 // in YOUR_ADMIN/includes/modules/YOUR_MODULE_NAME/controllers/Example.php
-$routes->register('example/index', // route, must contain '/' to make routing recognize it wants to reference to a class
-	'Example', // controller that is a class, could be different than the controller name in route
-	'index' // method, must be the same as the method name in route
+$routes->register('example', // route, must not contain special characters
+	'Example', // controller that is a class, could be different than the name in route
+	'index' // method
 	);
 
 // this makes the framework call to YOUR_ADMIN/includes/modules/YOUR_MODULE_NAME/controllers/example.php file
@@ -34,7 +34,7 @@ $routes->register('ajax_action_example', // route
 // Tips: controllers can be nested in sub folders within controllers/ folder
 // example:
 /*
-$routes->register('example/index', // route
+$routes->register('example', // route
 	'sub_folder/Example', // controller
 	'index' // method
 	);
@@ -44,7 +44,7 @@ $routes->register('example/index', // route
 
 // set default route
 $routes->set_default_route('index');
-//$routes->set_default_route('example/index'); // example default action
+//$routes->set_default_route('example'); // example default action
 
 if ( isset($_GET['action']) && $_GET['action'] != '' ) {
 	$action = $_GET['action'];
