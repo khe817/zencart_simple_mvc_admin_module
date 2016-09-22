@@ -8,8 +8,7 @@ if ( !defined('IS_ADMIN_FLAG')) {
 }
 
 /**
- * Model class name must be different than controller's class name.
- * Best practice is just adding 'Model' to the name.
+ * Model class name must be named with controller's name entailing with "Model"
  */
 class ExampleModel {
 
