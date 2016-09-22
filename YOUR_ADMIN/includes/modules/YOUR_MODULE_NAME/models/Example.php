@@ -3,7 +3,7 @@
  * Model file for controllers/Example.php
  */
 
-if ( !defined('IS_ADMIN_FLAG')) {
+if ( !defined('IS_ADMIN_FLAG') ) {
 	die('Illegal Access');
 }
 
