@@ -63,7 +63,7 @@ class SimpleController {
 
 	/**
 	 * load model file or class
-	 * @param  string  $model_filename model filename
+	 * @param  string  $model_filename model filename without extension (.php)
 	 * @param  boolean $load_class     whether or not to load the model class if exists
 	 * @return class instant or boolean
 	 */
@@ -81,8 +81,21 @@ class SimpleController {
 		return false;
 	}
 
-	public function get_template_path ( $view ) {
-		return $this->template_dir . $view;
+	/**
+	 * load helpers function file
+	 * @param  string  $function_filename function filename without extension (.php)
+	 * @return boolean
+	 */
+	public function load_function ( $function_filename ) {
+		if ( file_exists($this->module_dir . 'functions/' . $function_filename . '.php') ) {
+			require_once($this->module_dir . 'functions/' . $function_filename . '.php');
+			return true;
+		}
+		return false;
+	}
+
+	public function get_template_path ( $view_file_name ) {
+		return $this->template_dir . $view_file_name;
 	}
 
 	public function get_js_path ( $js_file_name ) {

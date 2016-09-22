@@ -147,7 +147,7 @@ Redirect to another controller inside a controller:
 	$routes->call_to_controller('controller', 'method');
 ```
 
-If controller is a class, call Javascript/CSS/Images in views using controller's method:
+Works when controller is a class, call Javascript/CSS/Images in views using controller's method:
 
 ```
 #!php
@@ -161,3 +161,15 @@ If controller is a class, call Javascript/CSS/Images in views using controller's
 	<!-- includes/modules/YOUR_MODULE_NAME/images/ -->
 	<img alt="" src="<?php echo $this->get_image_path('example.png'); ?>">
 ```
+
+Works when controller is a class, use helper functions in controller:
+
+```
+#!php
+	// function file locates in 'includes/modules/YOUR_MODULE_NAME/functions/'
+	// include function file
+	$this->load_function('general');
+	// use a function in function file
+	$current_admin_name = get_current_admin_name();
+```
+
