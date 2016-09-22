@@ -61,6 +61,26 @@ class SimpleController {
 		trigger_error("View $view does not exist.", E_USER_ERROR);
 	}
 
+	/**
+	 * load model file or class
+	 * @param  string  $model_filename model filename
+	 * @param  boolean $load_class     whether or not to load the model class if exists
+	 * @return class instant or boolean
+	 */
+	public function load_model ( $model_filename, $load_class = false ) {
+		if ( file_exists($this->module_dir . 'models/' . $model_filename . '.php') ) {
+			require_once($this->module_dir . 'models/' . $model_filename . '.php');
+			$model_class = $model_filename . 'Model';
+			if ( $load_class && class_exists($model_class) ) {
+				return new $model_class();
+			} else {
+				return false;
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public function get_template_path ( $view ) {
 		return $this->template_dir . $view;
 	}

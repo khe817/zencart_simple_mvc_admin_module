@@ -14,7 +14,7 @@ class Example extends SimpleController {
 
 		// --- do things
 
-		$exampleModel = new ExampleModel();
+		$exampleModel = $this->load_model('Example', true);
 		$current_admin_name = $exampleModel->get_current_admin_name();
 
 		// --- template vars
