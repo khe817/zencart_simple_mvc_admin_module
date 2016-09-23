@@ -27,7 +27,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
-
+<?php
 	$_GET['action'] = 'route';
 ```
 
@@ -35,7 +35,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
-
+<?php
 	// route to controller that is a simple file
 	$routes->register('index', 'example');
 
@@ -49,7 +49,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
-
+<?php
 	$routes->set_default_route('index');
 ```
 
@@ -75,7 +75,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
-
+<?php
 	$exampleModel = $this->load_model('Example', true);
 ```
 
@@ -87,6 +87,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
+<?php
 	// --- template vars
 	$controller = $this->controller_name;
 	$main_template = 'index';
@@ -98,6 +99,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
+<?php
 	// --- render view
 	$view_data = array(
 		'main_template' => $main_template,
@@ -112,7 +114,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
-
+<?php
 	require(MODULE_FOLDER_YOUR_MODULE_NAME . 'templates/example.php');
 ```
 - 
@@ -122,7 +124,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 ```
 #!php
-
+<?php
 	require($this->get_template_path('main_layout.php'));
 ```
 
@@ -143,6 +145,7 @@ Redirect to another controller inside a controller:
 
 ```
 #!php
+<?php
 	global $routes;
 	$routes->call_to_controller('controller', 'method');
 ```
@@ -166,6 +169,7 @@ Works when controller is a class, use helper functions in controller:
 
 ```
 #!php
+<?php
 	// function file locates in 'includes/modules/YOUR_MODULE_NAME/functions/'
 	// include function file
 	$this->load_function('general');
@@ -177,7 +181,8 @@ Works when controller is a class, use another controller's method inside a contr
 
 ```
 #!php
+<?php
 	$routes->call_to_controller('Example');
 	$example_controller = new Example($routes->module_dir);
-	$example_data = $answers_controller->example_method($params);
+	$example_data = $example_controller->example_method($params);
 ```
