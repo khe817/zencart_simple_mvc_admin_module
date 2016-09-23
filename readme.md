@@ -173,3 +173,11 @@ Works when controller is a class, use helper functions in controller:
 	$current_admin_name = get_current_admin_name();
 ```
 
+Works when controller is a class, use another controller's method inside a controller:
+
+```
+#!php
+	$routes->call_to_controller('Example');
+	$example_controller = new Example($routes->module_dir);
+	$example_data = $answers_controller->example_method($params);
+```
