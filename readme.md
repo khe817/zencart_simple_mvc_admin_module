@@ -37,15 +37,15 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 #!php
 <?php
 	// route to controller that is a simple file
-	$routes->register('index', 'example');
+	$routes->register('route', 'controller');
 
 	// route to method in controller that is a class 
-	$routes->register('index', 'Example', 'index');
-	$routes->register('search', 'sub_folder/Example2', 'search');
+	$routes->register('route', 'ControllerClass', 'method');
+	$routes->register('route2', 'sub_folder/ControllerClass2', 'method');
 
 ```
 
-- Default controller is index, set in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php
+- Default route is index, set in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php
 
 ```
 #!php
@@ -125,7 +125,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 ```
 #!php
 <?php
-	require($this->get_template_path('main_layout.php'));
+	require($this->get_template_path('example.php'));
 ```
 
 **Javascripts**:
@@ -147,7 +147,11 @@ Redirect to another controller inside a controller:
 #!php
 <?php
 	global $routes;
-	$routes->call_to_controller('controller', 'method');
+	// redirect to controller that is a file
+	$routes->call_to_controller('controller');
+	// redirect to a method in controller that is a class
+	$routes->call_to_controller('ControllerClass', 'method');
+
 ```
 
 Works when controller is a class, call Javascript/CSS/Images in views using controller's method:
