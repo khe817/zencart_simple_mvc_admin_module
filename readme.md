@@ -136,9 +136,6 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 - Example for ajax actions is in YOUR_ADMIN/modules/YOUR_MODULE_NAME/js/main.js
 
-Example module using this framework:
-https://bitbucket.org/numinix/authorizenet_virtual_terminal
-
 
 ### TIPS ###
 Redirect to another controller inside a controller:
@@ -190,3 +187,11 @@ Works when controller is a class, use another controller's method inside a contr
 	$example_controller = new Example($routes->module_dir);
 	$example_data = $example_controller->example_method($params);
 ```
+
+### Example modules using this framework: ###
+
+- Controllers as files:
+https://bitbucket.org/numinix/authorizenet_virtual_terminal
+
+- Controllers as classes:
+https://bitbucket.org/numinix/products_questions_answers
