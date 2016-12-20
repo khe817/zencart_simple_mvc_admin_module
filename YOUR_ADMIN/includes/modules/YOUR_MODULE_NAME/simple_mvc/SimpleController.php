@@ -11,7 +11,7 @@ class SimpleController {
 	public $css_dir;
 	public $image_dir;
 
-	function __construct ( $module_dir = __DIR__) {
+	public function __construct ( $module_dir = __DIR__ ) {
 		$this->controller_name = get_class($this);
 		$this->module_dir = $module_dir;
 		$this->template_dir = $this->module_dir . 'templates'. DIRECTORY_SEPARATOR;
@@ -47,7 +47,7 @@ class SimpleController {
 		// remove '/' before and after
 		$regex = DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
 		$view = trim($view, $regex);
-		
+
 		$template_path = $this->template_dir . $view .'.php';
 		if ( file_exists($template_path) ) {
 			ob_start();
@@ -57,7 +57,7 @@ class SimpleController {
 			ob_get_clean();
 			return $output;
 		}
-		
+
 		trigger_error("View $view does not exist.", E_USER_ERROR);
 	}
 

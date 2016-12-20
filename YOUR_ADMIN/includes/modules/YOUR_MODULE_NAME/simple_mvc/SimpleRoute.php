@@ -49,7 +49,7 @@ class SimpleRoute {
 			$this->controller_name = basename($controller, '.php');
 			require_once($this->module_dir . 'controllers/' . $controller . '.php');
 
-			if ( isset($action) ) {
+			if ( isset($action) && is_string($action) && $action != '' ) {
 				if ( !array_key_exists($controller, $this->in_used_controllers) ) { // create new object if not eixsts
 					$controller_class_name = $this->controller_name;
 					$to_call_controller = new $controller_class_name($this->module_dir);
@@ -87,6 +87,7 @@ class SimpleRoute {
 	 * @return void
 	 */
 	public function register_action_to_route ( $route, $controller, $action ) {
+		if ( $action == '' ) return;
 		if ( isset($action)	&& is_string($action) && $action != ''
 				&& in_array($controller, $this->routes) && in_array($action, $this->controllers[$controller]) ) {
 			$this->routes[$route] = array($controller => $action);
