@@ -7,6 +7,7 @@ class SimpleRoute {
 	public $in_used_controllers = array();
 	public $controller_name;
 	public $default_route = '';
+	public $current_route = '';
 
 	/**
 	 * contruct: set path to where the whole module locates
@@ -126,7 +127,9 @@ class SimpleRoute {
 	 * @return void
 	 */
 	public function navigate ( $route, $use_default = true ) {
+		$this->current_route = $route;
 		if ( $route == '' && $use_default && $this->default_route != '' ) {
+			$this->current_route = $this->default_route;
 			$this->navigate($this->default_route);
 		}
 
