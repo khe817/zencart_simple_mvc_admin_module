@@ -37,11 +37,11 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 #!php
 <?php
 	// route to controller that is a simple file
-	$routes->register('route', 'controller');
+	SimpleRoute::register('route', 'controller');
 
-	// route to method in controller that is a class 
-	$routes->register('route', 'ControllerClass', 'method');
-	$routes->register('route2', 'sub_folder/ControllerClass2', 'method');
+	// route to method in controller that is a class
+	SimpleRoute::register('route', 'ControllerClass', 'method');
+	SimpleRoute::register('route2', 'sub_folder/ControllerClass2', 'method');
 
 ```
 
@@ -50,7 +50,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 ```
 #!php
 <?php
-	$routes->set_default_route('index');
+	SimpleRoute::set_default_route('index');
 ```
 
 **Controllers**:
@@ -143,11 +143,11 @@ Redirect to another controller inside a controller:
 ```
 #!php
 <?php
-	global $routes;
 	// redirect to controller that is a file
-	$routes->call_to_controller('controller');
+	SimpleRoute::call_to_controller('controller');
+
 	// redirect to a method in controller that is a class
-	$routes->call_to_controller('ControllerClass', 'method');
+	SimpleRoute::call_to_controller('ControllerClass', 'method');
 
 ```
 
@@ -183,8 +183,8 @@ Works when controller is a class, use another controller's method inside a contr
 ```
 #!php
 <?php
-	$routes->call_to_controller('Example');
-	$example_controller = new Example($routes->module_dir);
+	SimpleRoute::call_to_controller('Example');
+	$example_controller = new Example(SimpleRoute::$module_dir);
 	$example_data = $example_controller->example_method($params);
 ```
 
