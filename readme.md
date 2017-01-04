@@ -143,11 +143,7 @@ Redirect to another controller inside a controller:
 ```
 #!php
 <?php
-	// redirect to controller that is a file
-	SimpleRoute::call_to_controller('controller');
-
-	// redirect to a method in controller that is a class
-	SimpleRoute::call_to_controller('ControllerClass', 'method');
+	SimpleRoute::navigate('route_to_another_controller');
 
 ```
 

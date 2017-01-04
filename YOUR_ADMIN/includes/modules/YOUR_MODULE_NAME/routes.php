@@ -47,7 +47,7 @@ SimpleRoute::set_default_route('index');
 if ( isset($_GET['action']) && $_GET['action'] != '' ) {
 	$action = $_GET['action'];
 } else { // the default route
-	$action = SimpleRoute::$default_route;
+	$action = SimpleRoute::get_default_route();
 }
 
 // navigate to the corresponding controller-method

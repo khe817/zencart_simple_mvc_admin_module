@@ -1,13 +1,13 @@
 <?php
 
 class SimpleRoute {
-	public static $module_dir;
-	public static $controllers = array();
-	public static $routes = array();
-	public static $in_used_controllers = array();
-	public static $controller_name;
-	public static $default_route = '';
-	public static $current_route = '';
+	private static $module_dir;
+	private static $controllers = array();
+	private static $routes = array();
+	private static $in_used_controllers = array();
+	private static $controller_name;
+	private static $default_route = '';
+	private static $current_route = '';
 
 	/**
 	 * contruct: set path to where the whole module locates
@@ -21,12 +21,28 @@ class SimpleRoute {
 	 * Set default route, to use when no route is set for navigation
 	 * @param string $route route to set
 	 */
-	public static function set_default_route( $route = '' ) {
+	public static function set_default_route ( $route = '' ) {
 		if ( is_string($route) && $route != '' ) {
 			self::$default_route = $route;
 		} else {
 			trigger_error("Invalid default route: $route.", E_USER_ERROR);
 		}
+	}
+
+	/**
+	 * get default route
+	 * @return string default route
+	 */
+	public static function get_default_route () {
+		return self::$default_route;
+	}
+
+	/**
+	 * get current route
+	 * @return string current route
+	 */
+	public static function get_current_route () {
+		return self::$current_route;
 	}
 
 	/**
