@@ -176,12 +176,22 @@ Works when controller is a class, use helper functions in controller:
 
 Works when controller is a class, use another controller's method inside a controller:
 
+- Method with arguments:
+
 ```
 #!php
 <?php
 	SimpleRoute::call_to_controller('Example');
 	$example_controller = new Example(SimpleRoute::$module_dir);
 	$example_data = $example_controller->example_method($params);
+```
+
+- Method without arguments:
+
+```
+#!php
+<?php
+	SimpleRoute::call_to_controller('Example', 'example_method');
 ```
 
 ### Example modules using this framework: ###
