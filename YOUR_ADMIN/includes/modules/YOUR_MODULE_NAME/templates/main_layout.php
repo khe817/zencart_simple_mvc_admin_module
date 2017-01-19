@@ -51,11 +51,11 @@
 	<script src="<?php echo MODULE_FOLDER_YOUR_MODULE_NAME; ?>js/main.js"></script>
 
 	<?php // load controller's related scripts
-	if ( file_exists(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.php') ) {
-		require(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.php');
+	if ( file_exists(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . ($this ? $this->controller_name : $controller) . '.php') ) {
+		require(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . ($this ? $this->controller_name : $controller) . '.php');
 	}
-	if ( file_exists(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.js') ) { ?>
-		<script src="<?php echo MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . $this->controller_name . '.js'; ?>"></script>
+	if ( file_exists(MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . ($this ? $this->controller_name : $controller) . '.js') ) { ?>
+		<script src="<?php echo MODULE_FOLDER_YOUR_MODULE_NAME . 'js/' . ($this ? $this->controller_name : $controller) . '.js'; ?>"></script>
 	<?php } ?>
 	<!-- eof module js -->
 </body>
