@@ -167,7 +167,7 @@ class SimpleRoute {
 						self::call_to_controller($controller, $action);
 					} else {
 						trigger_error("Method $action in controller $controller is not registered.", E_USER_WARNING);
-						if ( $use_default && self::$default_route != '' ) self::$navigate(self::$default_route);
+						if ( $use_default && self::$default_route != '' ) self::navigate(self::$default_route);
 					}
 					break;
 
@@ -176,18 +176,18 @@ class SimpleRoute {
 						self::call_to_controller($controller);
 					} else {
 						trigger_error("Controller $controller is not registered.", E_USER_WARNING);
-						if ( $use_default && self::$default_route != '' ) self::$navigate(self::$default_route);
+						if ( $use_default && self::$default_route != '' ) self::navigate(self::$default_route);
 					}
 					break;
 
 				default:
 					trigger_error("Invalid route: $route", E_USER_WARNING);
-					if ( $use_default && self::$default_route != '' ) self::$navigate(self::$default_route);
+					if ( $use_default && self::$default_route != '' ) self::navigate(self::$default_route);
 					break;
 			}
 		} else {
 			trigger_error("Route $route is not registered.", E_USER_WARNING);
-			if ( $use_default && self::$default_route != '' ) self::$navigate(self::$default_route);
+			if ( $use_default && self::$default_route != '' ) self::navigate(self::$default_route);
 		}
 	}
 }
