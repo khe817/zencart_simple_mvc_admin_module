@@ -25,17 +25,13 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 - Routes are determined by $_GET['action'] . Formats:
 
-```
-#!php
-<?php
+```php
 	$_GET['action'] = 'route';
 ```
 
 - Add routes for controllers in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php (detailed instructions is in the file)
 
-```
-#!php
-<?php
+```php
 	// route to controller that is a simple file
 	SimpleRoute::register('route', 'controller');
 
@@ -47,9 +43,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 - Default route is index, set in YOUR_ADMIN/modules/YOUR_MODULE_NAME/routes.php
 
-```
-#!php
-<?php
+```php
 	SimpleRoute::set_default_route('index');
 ```
 
@@ -73,9 +67,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 - Model functions and classes can then be initialized and referenced in controller. Example:
 
-```
-#!php
-<?php
+```php
 	$exampleModel = $this->load_model('Example', true);
 ```
 
@@ -85,9 +77,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 	* Method 1: call directly
 
-```
-#!php
-<?php
+```php
 	// --- template vars
 	$controller = $this->controller_name;
 	$main_template = 'index';
@@ -97,9 +87,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 - 
 	* Method 2: render view with passing data
 
-```
-#!php
-<?php
+```php
 	// --- render view
 	$view_data = array(
 		'main_template' => $main_template,
@@ -112,9 +100,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 
 	* Method 1: call directly, for controller that is not a class:
 
-```
-#!php
-<?php
+```php
 	require(MODULE_FOLDER_YOUR_MODULE_NAME . 'templates/example.php');
 ```
 - 
@@ -122,9 +108,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 	* Method 2: call via controller's method, for controller that is a class:
 
 
-```
-#!php
-<?php
+```php
 	require($this->get_template_path('example.php'));
 ```
 
@@ -140,9 +124,7 @@ Add common settings for the module in YOUR_ADMIN/YOUR_MODULE_NAME.php
 ### TIPS ###
 Redirect to another controller inside a controller:
 
-```
-#!php
-<?php
+```php
 	SimpleRoute::navigate('route_to_another_controller');
 
 ```
@@ -150,7 +132,6 @@ Redirect to another controller inside a controller:
 Works when controller is a class, call Javascript/CSS/Images in views using controller's method:
 
 ```
-#!php
 
 	<!-- includes/modules/YOUR_MODULE_NAME/js/ -->
 	<script src="<?php echo $this->get_js_path('example.js'); ?>"></script>
@@ -164,9 +145,7 @@ Works when controller is a class, call Javascript/CSS/Images in views using cont
 
 Works when controller is a class, use helper functions in controller:
 
-```
-#!php
-<?php
+```php
 	// function file locates in 'includes/modules/YOUR_MODULE_NAME/functions/'
 	// include function file
 	$this->load_function('general');
@@ -178,9 +157,7 @@ Works when controller is a class, use another controller's method inside a contr
 
 - Method with arguments:
 
-```
-#!php
-<?php
+```php
 	SimpleRoute::call_to_controller('Example');
 	$example_controller = new Example(SimpleRoute::$module_dir);
 	$example_data = $example_controller->example_method($params);
@@ -188,9 +165,7 @@ Works when controller is a class, use another controller's method inside a contr
 
 - Method without arguments:
 
-```
-#!php
-<?php
+```php
 	SimpleRoute::call_to_controller('Example', 'example_method');
 ```
 
